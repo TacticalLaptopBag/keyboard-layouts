@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+.navlink {
+  margin-right: 0.3rem;
+}
+
+.pointer-events-none {
+  cursor: default;
+  text-decoration: none;
+  font-weight: bold;
+  color: green;
+}

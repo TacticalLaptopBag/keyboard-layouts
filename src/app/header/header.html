@@ -1,0 +1,16 @@
+<div class="header">
+  <h1>Keyboard Layouts</h1>
+  @for (navLink of navLinks; track $index) {
+    <a
+      class="navlink"
+      [routerLink]="navLink.href"
+      routerLinkActive="active-link"
+      ariaCurrentWhenActive="page"
+      [class.pointer-events-none]="rla.isActive"
+      #rla="routerLinkActive"
+      [attr.tabindex]="rla.isActive ? -1 : null"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >{{navLink.title}}</a>
+  }
+  <div class="divider">
+</div>

@@ -1,1 +1,7 @@
-<router-outlet />
+<div class="background" [style.background-image]="`url(${baseUrl}/bg-tile.gif)`">
+  <div class="content">
+    <app-header/>
+    <router-outlet />
+    <app-footer/>
+  </div>
+</div>
