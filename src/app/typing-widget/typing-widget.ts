@@ -3,12 +3,14 @@ import { WordList } from '../../models/word-list.interface';
 import { HttpClient } from '@angular/common/http';
 import { WordStatus } from '../../models/word-status.enum';
 import { WordData } from '../../models/word-data.interface';
+import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Timer } from "../timer/timer";
 
 const INIT_WORD_COUNT = 50
 
 @Component({
     selector: 'app-typing-widget',
-    imports: [],
+    imports: [ReactiveFormsModule, Timer],
     templateUrl: './typing-widget.html',
     styleUrl: './typing-widget.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,6 +22,8 @@ export class TypingWidget implements OnInit {
     public wordSpans!: QueryList<ElementRef<HTMLSpanElement>>
     @ViewChild('wordContainer')
     public wordContainer!: ElementRef<HTMLDivElement>
+    @ViewChild('timer')
+    public timer!: Timer
 
     public wordListReady = signal(false)
     public currentWords = signal<WordData[]>([])
@@ -33,11 +37,17 @@ export class TypingWidget implements OnInit {
     ngOnInit(): void {
         this._http.get(this.wordListUrl).subscribe((wordList: any) => {
             this._wordList = wordList
-            for(let i = 0; i < INIT_WORD_COUNT; i++) {
-                this.generateWord()
-            }
+            this.initWords()
             this.wordListReady.set(true)
         });
+    }
+
+    private initWords() {
+        this.currentWords.set([])
+        this.currentWordIdx = 0
+        for(let i = 0; i < INIT_WORD_COUNT; i++) {
+            this.generateWord()
+        }
     }
 
     private generateWord() {
@@ -70,6 +80,20 @@ export class TypingWidget implements OnInit {
                 input.classList.remove('incorrect')
             }
         }
+
+        if(!this.timer.isTimerRunning) {
+            this.timer.start()
+        }
+    }
+
+    public onTimeout() {
+        // TODO: Show results
+        // TODO: Clear input
+    }
+
+    public onTimerReset() {
+        // TODO: Clear input
+        this.initWords()
     }
 
     private wordEntered(word: string) {

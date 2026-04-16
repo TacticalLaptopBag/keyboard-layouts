@@ -18,4 +18,8 @@
     (input)="onInput($event)"
     [disabled]="!wordListReady()"
   />
+  <app-timer
+    #timer
+    (timeout)="onTimeout()"
+    (reset)="onTimerReset()"/>
 </div>
