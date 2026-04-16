@@ -1,5 +1,5 @@
 <div class="typing-widget-container">
-  <div class="words-container">
+  <div class="words-container" #wordContainer>
     @for (wordData of currentWords(); track $index) {
       <span
         #wordSpan

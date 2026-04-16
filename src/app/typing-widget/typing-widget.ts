@@ -17,7 +17,9 @@ export class TypingWidget implements OnInit {
     @Input()
     public wordListUrl!: string
     @ViewChildren('wordSpan')
-    public wordSpans!: QueryList<ElementRef>
+    public wordSpans!: QueryList<ElementRef<HTMLSpanElement>>
+    @ViewChild('wordContainer')
+    public wordContainer!: ElementRef<HTMLDivElement>
 
     public wordListReady = signal(false)
     public currentWords = signal<WordData[]>([])
@@ -61,6 +63,7 @@ export class TypingWidget implements OnInit {
     }
 
     private wordEntered(word: string) {
+        // Update current word status
         const currentWord = this.currentWords()[this.currentWordIdx]
         if(word.toLowerCase() === currentWord.word.toLowerCase()) {
             currentWord.status = WordStatus.CORRECT
@@ -72,15 +75,21 @@ export class TypingWidget implements OnInit {
             newWords[this.currentWordIdx] = currentWord
             return newWords
         })
+
+        // Scroll to next word
         this.currentWordIdx += 1
         const nextWord = this.currentWords()[this.currentWordIdx]
 
         const currentWordSpanRef = this.wordSpans.toArray().find((spanRef) => {
-            const span: HTMLSpanElement = spanRef.nativeElement
+            const span = spanRef.nativeElement
             return span.innerText.trim() === nextWord.word && !span.classList.contains('correct') && !span.classList.contains('incorrect')
         })
-        const currentWordSpan: HTMLSpanElement = currentWordSpanRef?.nativeElement
-        currentWordSpan.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        if(currentWordSpanRef !== undefined) {
+            this.wordContainer.nativeElement.scrollTo({
+                top: currentWordSpanRef.nativeElement.offsetTop - this.wordContainer.nativeElement.offsetTop,
+                behavior: 'smooth',
+            })
+        }
 
         this.generateWord()
     }
