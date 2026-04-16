@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Lesson } from "../../lesson/lesson";
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-dvorak-one-handed',
@@ -11,4 +12,5 @@ import { Lesson } from "../../lesson/lesson";
 export class DvorakOneHanded {
     @Input()
     public imgUrls!: string[]
+    public baseUrl = environment.baseUrl
 }

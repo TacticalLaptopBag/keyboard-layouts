@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { DvorakOneHanded } from './pages/dvorak-one-handed/dvorak-one-handed';
+import { environment } from '../environments/environment';
 
 export const routes: Routes = [
     {
@@ -12,11 +13,11 @@ export const routes: Routes = [
         component: DvorakOneHanded,
         data: {
             imgUrls: [
-                '/dvorak-one-handed/left-img/DLH1.jpg',
-                '/dvorak-one-handed/left-img/DLH2.jpg',
-                '/dvorak-one-handed/left-img/DLH3.jpg',
-                '/dvorak-one-handed/left-img/DLH4.jpg',
-                '/dvorak-one-handed/left-img/DLH5.jpg',
+                `${environment.baseUrl}/dvorak-one-handed/left-img/DLH1.jpg`,
+                `${environment.baseUrl}/dvorak-one-handed/left-img/DLH2.jpg`,
+                `${environment.baseUrl}/dvorak-one-handed/left-img/DLH3.jpg`,
+                `${environment.baseUrl}/dvorak-one-handed/left-img/DLH4.jpg`,
+                `${environment.baseUrl}/dvorak-one-handed/left-img/DLH5.jpg`,
             ],
         },
     },
@@ -25,11 +26,11 @@ export const routes: Routes = [
         component: DvorakOneHanded,
         data: {
             imgUrls: [
-                '/dvorak-one-handed/right-img/DRH.jpg',
-                '/dvorak-one-handed/right-img/DRH.jpg',
-                '/dvorak-one-handed/right-img/DRH.jpg',
-                '/dvorak-one-handed/right-img/DRH.jpg',
-                '/dvorak-one-handed/right-img/DRH.jpg',
+                `${environment.baseUrl}/dvorak-one-handed/right-img/DRH.jpg`,
+                `${environment.baseUrl}/dvorak-one-handed/right-img/DRH.jpg`,
+                `${environment.baseUrl}/dvorak-one-handed/right-img/DRH.jpg`,
+                `${environment.baseUrl}/dvorak-one-handed/right-img/DRH.jpg`,
+                `${environment.baseUrl}/dvorak-one-handed/right-img/DRH.jpg`,
             ],
         },
     },
