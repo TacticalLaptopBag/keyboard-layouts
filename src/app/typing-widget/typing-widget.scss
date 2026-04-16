@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+.typing-widget-container {
+  border: solid 2px;
+  border-radius: 1rem;
+  border-color: cornflowerblue;
+  background: azure;
+  padding: 1rem;
+  font-size: 1.25rem;
+}
+
+.words-container {
+  overflow-y: hidden;
+  max-height: 3.0rem;
+  line-height: 1.5rem;
+}
+
+.word-input {
+  width: 100%;
+}

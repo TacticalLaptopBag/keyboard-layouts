@@ -1,0 +1,67 @@
+<div class="page">
+  <a routerLink="">Home</a>
+  <p>
+    Follow the color highlighting of the keys in the images to learn which fingers are meant to hit which keys,
+    and then type the content in the widget below. The lessons will gradually introduce more keys in groups
+    until all of the alphabetical keys have been covered.
+  </p>
+
+  <app-lesson
+    title="Lesson 1"
+    subtitle="Home Row - 6 Keys"
+    [imgUrl]="imgUrls[0]"
+    imgAlt="Finger placement"
+    wordListUrl="/dvorak-one-handed/wordlists/lesson1.json"
+  />
+  <div class="divider"></div>
+
+  <app-lesson
+    title="Lesson 2"
+    subtitle="
+    Top Row - 5 Keys
+    Home Row - 6 Keys
+    "
+    [imgUrl]="imgUrls[1]"
+    imgAlt="Finger placement"
+    wordListUrl="/dvorak-one-handed/wordlists/lesson2.json"
+  />
+  <div class="divider"></div>
+
+  <app-lesson
+    title="Lesson 3"
+    subtitle="
+    Top Row - 5 Keys
+    Home Row - 6 Keys
+    Bottom Row - 5 Keys
+    "
+    [imgUrl]="imgUrls[2]"
+    imgAlt="Finger placement"
+    wordListUrl="/dvorak-one-handed/wordlists/lesson3.json"
+  />
+  <div class="divider"></div>
+
+  <app-lesson
+    title="Lesson 4"
+    subtitle="
+    Number Row - 5 Keys
+    Top Row - 5 Keys
+    Home Row - 6 Keys
+    Bottom Row - 5 Keys
+    "
+    [imgUrl]="imgUrls[3]"
+    imgAlt="Finger placement"
+    wordListUrl="/dvorak-one-handed/wordlists/lesson4.json"
+  />
+  <div class="divider"></div>
+
+  <app-lesson
+    title="Lesson 5"
+    subtitle="
+    All Letters
+    "
+    [imgUrl]="imgUrls[4]"
+    imgAlt="Finger placement"
+    wordListUrl="/dvorak-one-handed/wordlists/lesson5.json"
+  />
+  <div class="scroll-spacer"></div>
+</div>

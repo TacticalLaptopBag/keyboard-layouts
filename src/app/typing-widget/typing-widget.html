@@ -1,0 +1,20 @@
+<div class="typing-widget-container">
+  <div class="words-container">
+    @for (wordData of currentWords(); track $index) {
+      <span
+        #wordSpan
+        [class.correct]="wordData.status === 'correct'"
+        [class.incorrect]="wordData.status === 'incorrect'"
+      >
+        {{wordData.word}}
+      </span>
+    }
+  </div>
+  <input
+    type="text"
+    class="word-input"
+    [value]="inputValue"
+    (input)="onInput($event)"
+    [disabled]="!wordListReady()"
+  />
+</div>

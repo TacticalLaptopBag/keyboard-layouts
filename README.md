@@ -1,59 +1,23 @@
-# OneHandedDvorak
+# One Handed Dvorak
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+This is a reimplementation of the [loboru.github.io][loboru] site.
+This site is meant to teach visitors how to use one-handed Dvorak keyboard layouts.
 
-## Development server
+However, this site depends on a third-party service, incorporating iframes from [10fastfingers].
+This worked well, except then the iframe service went down sometime around 2026-04-13, and has not recovered since.
 
-To start a local development server, run:
+This minimal Angular web app reimplements the 10fastfingers iframes so that there's no third-party dependencies.
+This site will remain running for as long as GitHub Pages exists.
 
-```bash
-ng serve
-```
+Currently, the site is very minimal, but will be expanded upon soon.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Attribution
 
-## Code scaffolding
+Please note that the included license only applies to the code and page layout.
+The images and wordlists have been ripped straight from [loboru's source code][loboru-src].
+I did not create these images, nor did I create the wordlists.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<!-- links -->
+[loboru]: https://loboru.github.io/index.html
+[loboru-src]: https://github.com/loboru/loboru.github.io/
+[10fastfingers]: https://10fastfingers.com/

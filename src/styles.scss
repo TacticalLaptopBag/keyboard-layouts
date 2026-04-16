@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+.page {
+  max-width: 900px;
+  margin: auto;
+  padding: 12px;
+  background: beige;
+}
+
+.page app-typing-widget {
+  width: 50%;
+  margin: auto;
+}
+
+div.divider {
+  border: 1px solid;
+  border-color: #00000055;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+div.scroll-spacer {
+  margin-top: 50vh;
+}
+
+body {
+  background-color: grey;
+  margin: 0;
+}
