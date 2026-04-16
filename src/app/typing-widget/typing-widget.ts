@@ -3,14 +3,16 @@ import { WordList } from '../../models/word-list.interface';
 import { HttpClient } from '@angular/common/http';
 import { WordStatus } from '../../models/word-status.enum';
 import { WordData } from '../../models/word-data.interface';
-import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Timer } from "../timer/timer";
+import { ResultsData } from '../../models/results-data.interface';
+import { Results } from "./results/results";
 
 const INIT_WORD_COUNT = 50
 
 @Component({
     selector: 'app-typing-widget',
-    imports: [ReactiveFormsModule, Timer],
+    imports: [ReactiveFormsModule, Timer, Results],
     templateUrl: './typing-widget.html',
     styleUrl: './typing-widget.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,6 +33,14 @@ export class TypingWidget implements OnInit {
     public currentWords = signal<WordData[]>([])
     public currentWordIdx = 0
 
+    public showResults = signal(false)
+    private _nextResults: ResultsData = {
+        correctWords: 0,
+        incorrectWords: 0,
+        minutesElapsed: 0,
+    }
+    public resultsData = signal<ResultsData>(this._nextResults)
+
     private _wordList?: WordList
 
     private _http = inject(HttpClient)
@@ -45,6 +55,12 @@ export class TypingWidget implements OnInit {
     }
 
     private initWords() {
+        this._nextResults = {
+            correctWords: 0,
+            incorrectWords: 0,
+            minutesElapsed: 0,
+        }
+        this.showResults.set(false)
         this.inputControl.setValue('')
         this.inputControl.enable()
         this.badInput.set(false)
@@ -82,8 +98,11 @@ export class TypingWidget implements OnInit {
         }
     }
 
-    public onTimeout() {
-        // TODO: Show results
+    public onTimeout(minutes: number) {
+        console.log(minutes)
+        this._nextResults.minutesElapsed = minutes
+        this.resultsData.set(this._nextResults)
+        this.showResults.set(true)
         this.inputControl.disable()
     }
 
@@ -100,8 +119,10 @@ export class TypingWidget implements OnInit {
         const currentWord = this.currentWords()[this.currentWordIdx]
         if(word.toLowerCase() === currentWord.word.toLowerCase()) {
             currentWord.status = WordStatus.CORRECT
+            this._nextResults.correctWords += 1
         } else {
             currentWord.status = WordStatus.INCORRECT
+            this._nextResults.incorrectWords += 1
         }
         this.currentWords.update((currentWords) => {
             const newWords = [...currentWords]

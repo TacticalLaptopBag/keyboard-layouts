@@ -12,7 +12,7 @@ export const DEFAULT_START_TIME = '10:00'
 })
 export class Timer implements OnInit {
     @Output()
-    public timeout = new EventEmitter()
+    public timeout = new EventEmitter<number>()
     @Output()
     public reset = new EventEmitter()
     public startTime = DEFAULT_START_TIME
@@ -51,14 +51,21 @@ export class Timer implements OnInit {
         return num.toString().padStart(2, '0')
     }
 
+    private parseTime(timeStr: string): [number, number] {
+        const timeSplit = timeStr.split(':')
+        const minutes = Number.parseInt(timeSplit[0])
+        const seconds = Number.parseInt(timeSplit[1])
+        return [minutes, seconds]
+    }
+
     private tick() {
-        const timeSplit = this.timerControl.value?.split(':')
-        if(!timeSplit) return
-        let mins = Number.parseInt(timeSplit[0])
-        let secs = Number.parseInt(timeSplit[1])
+        if(!this.timerControl.value) return
+        let [mins, secs] = this.parseTime(this.timerControl.value)
+
         secs -= 1
         if(secs <= 0 && mins <= 0) {
-            this.timeout.emit()
+            const [startMins, startSecs] = this.parseTime(this.startTime)
+            this.timeout.emit(startMins + startSecs / 60)
             this.stop()
             return
         }

@@ -20,6 +20,9 @@
   />
   <app-timer
     #timer
-    (timeout)="onTimeout()"
+    (timeout)="onTimeout($event)"
     (reset)="onTimerReset()"/>
+  @if (showResults()) {
+    <app-results [data]="resultsData()"/>
+  }
 </div>
