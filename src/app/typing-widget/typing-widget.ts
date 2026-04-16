@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, OnInit, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
 import { WordList } from '../../models/word-list.interface';
 import { HttpClient } from '@angular/common/http';
 import { WordStatus } from '../../models/word-status.enum';
@@ -28,7 +28,7 @@ export class TypingWidget implements OnInit {
 
     private _wordList?: WordList
 
-    constructor(private _http: HttpClient) {}
+    private _http = inject(HttpClient)
 
     ngOnInit(): void {
         this._http.get(this.wordListUrl).subscribe((wordList: any) => {
