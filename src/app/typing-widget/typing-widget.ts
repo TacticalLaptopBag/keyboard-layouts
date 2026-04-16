@@ -63,6 +63,12 @@ export class TypingWidget implements OnInit {
             this.submitWord(input)
         } else {
             this.inputValue = input.value
+            const currentWord = this.currentWords()[this.currentWordIdx]
+            if(!input.classList.contains('incorrect') && !currentWord.word.startsWith(this.inputValue)) {
+                input.classList.add('incorrect')
+            } else if(input.classList.contains('incorrect') && currentWord.word.startsWith(this.inputValue)) {
+                input.classList.remove('incorrect')
+            }
         }
     }
 
