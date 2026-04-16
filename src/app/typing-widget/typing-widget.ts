@@ -25,16 +25,18 @@ export class TypingWidget implements OnInit {
     @ViewChild('timer')
     public timer!: Timer
 
+    public inputControl = new FormControl('')
+    public badInput = signal(false)
     public wordListReady = signal(false)
     public currentWords = signal<WordData[]>([])
     public currentWordIdx = 0
-    public inputValue = ''
 
     private _wordList?: WordList
 
     private _http = inject(HttpClient)
 
     ngOnInit(): void {
+        this.inputControl.disable()
         this._http.get(this.wordListUrl).subscribe((wordList: any) => {
             this._wordList = wordList
             this.initWords()
@@ -43,6 +45,9 @@ export class TypingWidget implements OnInit {
     }
 
     private initWords() {
+        this.inputControl.setValue('')
+        this.inputControl.enable()
+        this.badInput.set(false)
         this.currentWords.set([])
         this.currentWordIdx = 0
         for(let i = 0; i < INIT_WORD_COUNT; i++) {
@@ -61,24 +66,15 @@ export class TypingWidget implements OnInit {
         this.currentWords.update((currentWords) => [...currentWords, wordData])
     }
 
-    public submitWord(input: HTMLInputElement) {
-        this.wordEntered(this.inputValue)
-        this.inputValue = ''
-        input.value = ''
-    }
-
-    public onInput(event: Event) {
-        const input = event.target as HTMLInputElement
-        if (/[\s\n]/.test(input.value)) {
-            this.submitWord(input)
+    public onInput() {
+        const input = this.inputControl.value
+        if(input === null) return
+        if (/[\s\n]/.test(input)) {
+            this.submitWord()
+            this.badInput.set(false)
         } else {
-            this.inputValue = input.value
             const currentWord = this.currentWords()[this.currentWordIdx]
-            if(!input.classList.contains('incorrect') && !currentWord.word.startsWith(this.inputValue)) {
-                input.classList.add('incorrect')
-            } else if(input.classList.contains('incorrect') && currentWord.word.startsWith(this.inputValue)) {
-                input.classList.remove('incorrect')
-            }
+            this.badInput.set(!currentWord.word.toLowerCase().startsWith(input.toLowerCase()))
         }
 
         if(!this.timer.isTimerRunning) {
@@ -88,16 +84,19 @@ export class TypingWidget implements OnInit {
 
     public onTimeout() {
         // TODO: Show results
-        // TODO: Clear input
+        this.inputControl.disable()
     }
 
     public onTimerReset() {
-        // TODO: Clear input
         this.initWords()
     }
 
-    private wordEntered(word: string) {
+    public submitWord() {
+        const word = this.inputControl.value?.trim()
+        if(word == null) return
+
         // Update current word status
+        this.inputControl.setValue('', { emitEvent: false })
         const currentWord = this.currentWords()[this.currentWordIdx]
         if(word.toLowerCase() === currentWord.word.toLowerCase()) {
             currentWord.status = WordStatus.CORRECT

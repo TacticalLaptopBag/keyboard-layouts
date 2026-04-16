@@ -13,10 +13,10 @@
   <input
     type="text"
     class="word-input"
-    [value]="inputValue"
-    (keydown.enter)="submitWord($event.target)"
-    (input)="onInput($event)"
-    [disabled]="!wordListReady()"
+    [class.incorrect]="badInput()"
+    [formControl]="inputControl"
+    (keydown.enter)="submitWord()"
+    (input)="onInput()"
   />
   <app-timer
     #timer
