@@ -51,12 +51,16 @@ export class TypingWidget implements OnInit {
         this.currentWords.update((currentWords) => [...currentWords, wordData])
     }
 
+    public submitWord(input: HTMLInputElement) {
+        this.wordEntered(this.inputValue)
+        this.inputValue = ''
+        input.value = ''
+    }
+
     public onInput(event: Event) {
         const input = event.target as HTMLInputElement
         if (/[\s\n]/.test(input.value)) {
-            this.wordEntered(this.inputValue)
-            this.inputValue = ''
-            input.value = ''
+            this.submitWord(input)
         } else {
             this.inputValue = input.value
         }
