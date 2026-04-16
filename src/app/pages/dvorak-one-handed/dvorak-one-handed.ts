@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Lesson } from "../../lesson/lesson";
-import { environment } from '../../../environments/environment';
 import { RouterLink } from '@angular/router';
+import { WithBaseUrlPipe } from "../../../pipes/with-base-url-pipe";
 
 @Component({
     selector: 'app-dvorak-one-handed',
-    imports: [Lesson, RouterLink],
+    imports: [Lesson, RouterLink, WithBaseUrlPipe],
     templateUrl: './dvorak-one-handed.html',
     styleUrl: './dvorak-one-handed.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,5 +13,4 @@ import { RouterLink } from '@angular/router';
 export class DvorakOneHanded {
     @Input()
     public imgUrls!: string[]
-    public baseUrl = environment.baseUrl
 }
