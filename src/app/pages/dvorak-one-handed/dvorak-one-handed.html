@@ -6,61 +6,66 @@
   </p>
 
   <app-lesson
-    title="Lesson 1"
-    subtitle="Home Row - 6 Keys"
     [imgUrl]="imgUrls[0]"
     imgAlt="Finger placement"
     [wordListUrl]="'/dvorak-one-handed/wordlists/lesson1.json' | withBaseUrl"
-  />
+  >
+    <app-lesson-title>Lesson 1</app-lesson-title>
+    <app-lesson-subtitle>Home Row - 6 Keys</app-lesson-subtitle>
+  </app-lesson>
   <div class="divider"></div>
 
   <app-lesson
-    title="Lesson 2"
-    subtitle="
-    Top Row - 5 Keys
-    Home Row - 6 Keys
-    "
     [imgUrl]="imgUrls[1]"
     imgAlt="Finger placement"
     [wordListUrl]="'/dvorak-one-handed/wordlists/lesson2.json' | withBaseUrl"
-  />
+  >
+    <app-lesson-title>Lesson 2</app-lesson-title>
+    <app-lesson-subtitle>
+      Top Row - 5 Keys<br>
+      Home Row - 6 Keys
+    </app-lesson-subtitle>
+  </app-lesson>
   <div class="divider"></div>
 
   <app-lesson
-    title="Lesson 3"
-    subtitle="
-    Top Row - 5 Keys
-    Home Row - 6 Keys
-    Bottom Row - 5 Keys
-    "
     [imgUrl]="imgUrls[2]"
     imgAlt="Finger placement"
     [wordListUrl]="'/dvorak-one-handed/wordlists/lesson3.json' | withBaseUrl"
-  />
+  >
+    <app-lesson-title>Lesson 3</app-lesson-title>
+    <app-lesson-subtitle>
+      Top Row - 5 Keys<br>
+      Home Row - 6 Keys<br>
+      Bottom Row - 5 Keys
+    </app-lesson-subtitle>
+  </app-lesson>
   <div class="divider"></div>
 
   <app-lesson
-    title="Lesson 4"
-    subtitle="
-    Number Row - 5 Keys
-    Top Row - 5 Keys
-    Home Row - 6 Keys
-    Bottom Row - 5 Keys
-    "
     [imgUrl]="imgUrls[3]"
     imgAlt="Finger placement"
     [wordListUrl]="'/dvorak-one-handed/wordlists/lesson4.json' | withBaseUrl"
-  />
+  >
+    <app-lesson-title>Lesson 4</app-lesson-title>
+    <app-lesson-subtitle>
+      Number Row - 5 Keys<br>
+      Top Row - 5 Keys<br>
+      Home Row - 6 Keys<br>
+      Bottom Row - 5 Keys
+    </app-lesson-subtitle>
+  </app-lesson>
   <div class="divider"></div>
 
   <app-lesson
-    title="Lesson 5"
-    subtitle="
-    All Letters
-    "
     [imgUrl]="imgUrls[4]"
     imgAlt="Finger placement"
     [wordListUrl]="'/dvorak-one-handed/wordlists/lesson5.json' | withBaseUrl"
-  />
+  >
+    <app-lesson-title>Lesson 5</app-lesson-title>
+    <app-lesson-subtitle>
+      All Letters
+    </app-lesson-subtitle>
+  </app-lesson>
   <div class="scroll-spacer"></div>
 </div>

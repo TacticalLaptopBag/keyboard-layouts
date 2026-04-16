@@ -2,6 +2,11 @@
   display: block;
 }
 
-img {
+.lesson img {
   max-width: 100%;
+}
+
+.lesson h1,
+.lesson h2 {
+  text-align: center;
 }

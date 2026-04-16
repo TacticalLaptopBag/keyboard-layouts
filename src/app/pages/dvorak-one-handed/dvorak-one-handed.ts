@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Lesson } from "../../lesson/lesson";
+import { Lesson, LessonTitle, LessonSubtitle } from "../../lesson/lesson";
 import { WithBaseUrlPipe } from "../../../pipes/with-base-url-pipe";
 
 @Component({
     selector: 'app-dvorak-one-handed',
-    imports: [Lesson, WithBaseUrlPipe],
+    imports: [Lesson, WithBaseUrlPipe, LessonTitle, LessonSubtitle],
     templateUrl: './dvorak-one-handed.html',
     styleUrl: './dvorak-one-handed.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -20,3 +20,15 @@ export class Lesson {
     @Input()
     public wordListUrl!: string
 }
+
+@Component({
+    selector: 'app-lesson-title',
+    template: '<ng-content/>',
+})
+export class LessonTitle {}
+
+@Component({
+    selector: 'app-lesson-subtitle',
+    template: '<ng-content/>',
+})
+export class LessonSubtitle {}
