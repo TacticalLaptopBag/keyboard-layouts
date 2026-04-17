@@ -32,7 +32,7 @@ npm run start
 
 Simply run this command to deploy to GitHub Pages:
 ```bash
-ng deploy --base-href=/keyboard-layouts/
+npm run deploy
 ```
 
 ## Attribution
