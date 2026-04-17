@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-
-export const DEFAULT_START_TIME = '10:00'
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-timer',
@@ -15,7 +14,7 @@ export class Timer implements OnInit {
     public timeout = new EventEmitter<number>()
     @Output()
     public reset = new EventEmitter()
-    public startTime = DEFAULT_START_TIME
+    public startTime = environment.defaultStartTime
     public timerControl = new FormControl(this.startTime)
     public isTimerRunning = false
 
@@ -31,7 +30,7 @@ export class Timer implements OnInit {
         }
 
         this.isTimerRunning = true
-        this.startTime = this.timerControl.value ?? DEFAULT_START_TIME
+        this.startTime = this.timerControl.value ?? environment.defaultStartTime
         this.timerControl.disable()
         this._interval = setInterval(() => {
             this.tick()

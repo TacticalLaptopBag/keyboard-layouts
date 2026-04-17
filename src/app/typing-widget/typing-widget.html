@@ -10,18 +10,20 @@
       </span>
     }
   </div>
-  <input
-    type="text"
-    class="word-input"
-    [class.incorrect]="badInput()"
-    [formControl]="inputControl"
-    (keydown.enter)="submitWord()"
-    (input)="onInput()"
-  />
-  <app-timer
-    #timer
-    (timeout)="onTimeout($event)"
-    (reset)="onTimerReset()"/>
+  <div class="input-row">
+    <input
+      type="text"
+      class="word-input"
+      [class.incorrect]="badInput()"
+      [formControl]="inputControl"
+      (keydown.enter)="submitWord()"
+      (input)="onInput()"
+    />
+    <app-timer
+      #timer
+      (timeout)="onTimeout($event)"
+      (reset)="onTimerReset()"/>
+  </div>
   @if (showResults()) {
     <app-results [data]="resultsData()"/>
   }

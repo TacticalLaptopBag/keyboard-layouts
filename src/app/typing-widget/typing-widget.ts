@@ -99,7 +99,6 @@ export class TypingWidget implements OnInit {
     }
 
     public onTimeout(minutes: number) {
-        console.log(minutes)
         this._nextResults.minutesElapsed = minutes
         this.resultsData.set(this._nextResults)
         this.showResults.set(true)

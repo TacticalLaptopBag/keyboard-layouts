@@ -33,3 +33,10 @@ input.incorrect {
   width: 100%;
   box-sizing: border-box;
 }
+
+.input-row {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}

@@ -1,3 +1,21 @@
 :host {
   display: block;
 }
+
+.results {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: palegreen;
+  border: 1px solid green;
+  border-radius: 1rem;
+}
+
+.correct {
+  color: blueviolet;
+}
+
+.incorrect {
+  color: red;
+}
