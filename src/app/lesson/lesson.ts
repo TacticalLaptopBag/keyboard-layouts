@@ -19,6 +19,8 @@ export class Lesson {
     public imgAlt!: string
     @Input()
     public wordListUrl!: string
+
+    public isImgHidden = false
 }
 
 @Component({

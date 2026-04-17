@@ -5,9 +5,14 @@
   <h2>
     <ng-content select="app-lesson-subtitle"/>
   </h2>
-  <img
-    [src]="imgUrl"
-    [alt]="imgAlt"
-  />
+  @if(!isImgHidden) {
+    <img
+      [src]="imgUrl"
+      [alt]="imgAlt"
+    />
+    <button (click)="isImgHidden = true">Hide Image</button>
+  } @else {
+    <button (click)="isImgHidden = false">Show Image</button>
+  }
   <app-typing-widget [wordListUrl]="wordListUrl"/>
 </div>
