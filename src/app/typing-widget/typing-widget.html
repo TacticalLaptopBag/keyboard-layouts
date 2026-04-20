@@ -3,6 +3,8 @@
     @for (wordData of currentWords(); track $index) {
       <span
         #wordSpan
+        [class.queued]="wordData.status === 'queued'"
+        [class.next]="wordData.status === 'next'"
         [class.correct]="wordData.status === 'correct'"
         [class.incorrect]="wordData.status === 'incorrect'"
       >

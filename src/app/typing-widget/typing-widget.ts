@@ -69,17 +69,21 @@ export class TypingWidget implements OnInit {
         this.currentWords.set([])
         this.currentWordIdx = 0
         for(let i = 0; i < INIT_WORD_COUNT; i++) {
-            this.generateWord()
+            this.generateWord(i == 0 ? WordStatus.NEXT : WordStatus.QUEUED)
         }
+        this.wordContainer.nativeElement.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
     }
 
-    private generateWord() {
+    private generateWord(status: WordStatus = WordStatus.QUEUED) {
         if(this._wordList == undefined) return;
         const randomWordIdx = Math.floor(Math.random() * this._wordList.words.length)
         const randomWord = this._wordList.words[randomWordIdx]
         const wordData: WordData = {
             word: randomWord,
-            status: WordStatus.QUEUED,
+            status,
         }
         this.currentWords.update((currentWords) => [...currentWords, wordData])
     }
@@ -111,6 +115,23 @@ export class TypingWidget implements OnInit {
         this.initWords()
     }
 
+    private getWordSpanRef(data: WordData) {
+        return this.wordSpans.toArray().find((spanRef) => {
+            const span = spanRef.nativeElement
+            return span.innerText.trim() === data.word && span.classList.contains(data.status)
+        })
+    }
+
+    private scrollToWord(word: WordData) {
+        const currentWordSpanRef = this.getWordSpanRef(word)
+        if(currentWordSpanRef !== undefined) {
+            this.wordContainer.nativeElement.scrollTo({
+                top: currentWordSpanRef.nativeElement.offsetTop - this.wordContainer.nativeElement.offsetTop,
+                behavior: 'smooth',
+            })
+        }
+    }
+
     public submitWord() {
         const word = this.inputControl.value?.trim()
         if(word == null) return
@@ -130,23 +151,16 @@ export class TypingWidget implements OnInit {
         this.currentWords.update((currentWords) => {
             const newWords = [...currentWords]
             newWords[this.currentWordIdx] = currentWord
+            if(this.currentWordIdx+1 < newWords.length) {
+                newWords[this.currentWordIdx+1].status = WordStatus.NEXT
+            }
             return newWords
         })
 
         // Scroll to next word
         this.currentWordIdx += 1
         const nextWord = this.currentWords()[this.currentWordIdx]
-
-        const currentWordSpanRef = this.wordSpans.toArray().find((spanRef) => {
-            const span = spanRef.nativeElement
-            return span.innerText.trim() === nextWord.word && !span.classList.contains('correct') && !span.classList.contains('incorrect')
-        })
-        if(currentWordSpanRef !== undefined) {
-            this.wordContainer.nativeElement.scrollTo({
-                top: currentWordSpanRef.nativeElement.offsetTop - this.wordContainer.nativeElement.offsetTop,
-                behavior: 'smooth',
-            })
-        }
+        this.scrollToWord(nextWord)
 
         this.generateWord()
     }
