@@ -13,8 +13,7 @@ export class Results {
     public data!: ResultsData
 
     public getWPM(): number {
-        // TODO: Something is wrong about this calculation.
-        // I type at abt 100 WPM, but even on standard Dvorak I'm getting like 40 WPM in the all letters tests
-        return (this.data.correctWords + this.data.incorrectWords) / this.data.minutesElapsed
+        const wpm = (this.data.correctWords + this.data.incorrectWords) / this.data.minutesElapsed
+        return wpm
     }
 }
