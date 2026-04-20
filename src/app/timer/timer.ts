@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
 
@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
     styleUrl: './timer.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Timer implements OnInit {
+export class Timer {
     @Output()
     public timeout = new EventEmitter<number>()
     @Output()
@@ -19,10 +19,6 @@ export class Timer implements OnInit {
     public isTimerRunning = false
 
     private _interval = -1
-
-    ngOnInit(): void {
-        this.timerControl.disable()
-    }
 
     public start() {
         if(this._interval >= 0) {
@@ -43,7 +39,6 @@ export class Timer implements OnInit {
         this._interval = -1
         this.timerControl.setValue(this.startTime)
         this.isTimerRunning = false
-        // this.timerControl.enable()
     }
 
     private padZeros(num: number): string {
@@ -79,6 +74,38 @@ export class Timer implements OnInit {
 
     public onResetClicked() {
         this.stop()
+        this.timerControl.enable()
         this.reset.emit()
+    }
+
+    private resetValue(emitEvent: boolean = false) {
+        this.timerControl.setValue(environment.defaultStartTime, { emitEvent })
+    }
+
+    public onChanged() {
+        const inputValue = this.timerControl.value
+        if(!inputValue) {
+            this.resetValue()
+            return
+        }
+
+        let mins: number
+        let secs: number
+        if(/^[0-9]+:[0-9]+$/.test(inputValue)) {
+            [mins, secs] = this.parseTime(inputValue)
+            mins += Math.floor(secs / 60)
+            secs -= 60 * Math.floor(secs / 60)
+        } else {
+            const inputNum = Number.parseInt(inputValue)
+            if(Number.isNaN(inputNum)) {
+                this.resetValue()
+                return
+            }
+
+            mins = Math.floor(inputNum / 60)
+            secs = inputNum - (60 * mins)
+        }
+
+        this.timerControl.setValue(`${this.padZeros(mins)}:${this.padZeros(secs)}`, { emitEvent: false })
     }
 }
