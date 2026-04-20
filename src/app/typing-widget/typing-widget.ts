@@ -82,6 +82,7 @@ export class TypingWidget implements OnInit {
         const randomWordIdx = Math.floor(Math.random() * this._wordList.words.length)
         const randomWord = this._wordList.words[randomWordIdx]
         const wordData: WordData = {
+            id: this.currentWords().length,
             word: randomWord,
             status,
         }
@@ -118,7 +119,7 @@ export class TypingWidget implements OnInit {
     private getWordSpanRef(data: WordData) {
         return this.wordSpans.toArray().find((spanRef) => {
             const span = spanRef.nativeElement
-            return span.innerText.trim() === data.word && span.classList.contains(data.status)
+            return span.innerText.trim() === data.word && span.getAttribute('data-word-id') === data.id.toString()
         })
     }
 
