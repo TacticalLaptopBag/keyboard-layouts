@@ -37,6 +37,7 @@ export class TypingWidget implements OnInit {
     private _nextResults: ResultsData = {
         correctWords: 0,
         incorrectWords: 0,
+        lettersTyped: 0,
         minutesElapsed: 0,
     }
     public resultsData = signal<ResultsData>(this._nextResults)
@@ -58,6 +59,7 @@ export class TypingWidget implements OnInit {
         this._nextResults = {
             correctWords: 0,
             incorrectWords: 0,
+            lettersTyped: 0,
             minutesElapsed: 0,
         }
         this.showResults.set(false)
@@ -112,6 +114,8 @@ export class TypingWidget implements OnInit {
     public submitWord() {
         const word = this.inputControl.value?.trim()
         if(word == null) return
+
+        this._nextResults.lettersTyped += word.length
 
         // Update current word status
         this.inputControl.setValue('', { emitEvent: false })
