@@ -106,6 +106,7 @@ export class TypingWidget implements OnInit {
     }
 
     public onTimeout(minutes: number) {
+        this._nextResults.lettersTyped += this.inputControl.value?.length ?? 0
         this._nextResults.minutesElapsed = minutes
         this.resultsData.set(this._nextResults)
         this.showResults.set(true)

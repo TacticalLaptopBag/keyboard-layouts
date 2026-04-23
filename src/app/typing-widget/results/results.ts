@@ -12,8 +12,8 @@ export class Results {
     @Input()
     public data!: ResultsData
 
-    public getWPM(): number {
-        const wpm = (this.data.correctWords + this.data.incorrectWords) / this.data.minutesElapsed
-        return wpm
+    public getWPM(): string {
+        const wpm = (this.data.lettersTyped / 5) / this.data.minutesElapsed
+        return wpm.toFixed(1)
     }
 }
