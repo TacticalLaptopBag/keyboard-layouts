@@ -3,26 +3,26 @@
 }
 
 .queued {
-  color: gray;
+  color: var(--text-color-faded);
 }
 
 .correct {
-  color: green;
+  color: var(--text-color-good);
 }
 
 .incorrect {
-  color: red;
+  color: var(--text-color-bad);
 }
 
 input.incorrect {
-  background-color: #ffeeeeee;
+  background-color: var(--bg-color-bad);
 }
 
 .typing-widget-container {
   border: solid 2px;
   border-radius: 1rem;
-  border-color: cornflowerblue;
-  background: azure;
+  border-color: var(--container-border-color);
+  background: var(--container-color);
   padding: 1rem;
   font-size: 1.25rem;
 }

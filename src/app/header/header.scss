@@ -10,5 +10,13 @@
   cursor: default;
   text-decoration: none;
   font-weight: bold;
-  color: green;
+  color: var(--text-color-good);
+}
+
+.title-row {
+  display: flex;
+}
+
+.title-row h1 {
+  flex: 1;
 }

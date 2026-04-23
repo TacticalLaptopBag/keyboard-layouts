@@ -7,15 +7,15 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
-  background-color: palegreen;
-  border: 1px solid green;
+  background-color: var(--container-secondary-color);
+  border: 1px solid var(--container-secondary-border-color);
   border-radius: 1rem;
 }
 
 .correct {
-  color: blueviolet;
+  color: var(--text-color-good);
 }
 
 .incorrect {
-  color: red;
+  color: var(--text-color-bad);
 }

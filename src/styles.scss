@@ -1,4 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-color: beige;
+  --bg-color-bad: #ffeeeeee;
+  --text-color: black;
+  --text-color-faded: gray;
+  --text-color-good: green;
+  --text-color-bad: red;
+  --text-anchor-color: blue;
+  --text-anchor-visited-color: purple;
+  --divider-color: #00000055;
+
+  --container-color: azure;
+  --container-border-color: cornflowerblue;
+  --container-secondary-color: palegreen;
+  --container-secondary-border-color: green;
+}
+
+.dark {
+  --bg-color: #303030;
+  --bg-color-bad: #ffeeeeee;
+  --text-color: white;
+  --text-color-faded: #ffffff90;
+  --text-color-good: #00ff00;
+  --text-color-bad: #ff0000;
+  --text-anchor-color: cyan;
+  --text-anchor-visited-color: #ff77ff;
+  --divider-color: #ffffff55;
+
+  --container-color: rgb(66, 102, 168);
+  --container-border-color: rgb(183, 201, 201);
+  --container-secondary-color: rgb(122, 90, 8);
+  --container-secondary-border-color: darkgoldenrod;
+}
+
 .page app-typing-widget {
   width: 50%;
   margin: auto;
@@ -6,7 +39,7 @@
 
 div.divider {
   border: 1px solid;
-  border-color: #00000055;
+  border-color: var(--divider-color);
   margin-top: 12px;
   margin-bottom: 12px;
 }
@@ -18,4 +51,27 @@ div.scroll-spacer {
 body {
   background-color: grey;
   margin: 0;
+  color: var(--text-color);
+}
+
+a {
+  color: var(--text-anchor-color);
+}
+
+a:visited {
+  color: var(--text-anchor-visited-color);
+}
+
+.dark img {
+  filter: invert(90%);
+}
+
+button.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button.icon-btn:hover img {
+  filter:invert(50%);
 }

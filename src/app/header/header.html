@@ -1,16 +1,20 @@
 <div class="header">
-  <h1>Keyboard Layouts</h1>
+  <div class="title-row">
+    <h1>Keyboard Layouts</h1>
+    @if (themeSvc.isDarkTheme$ | async) {
+    <button class="icon-btn" (click)="themeSvc.setDarkTheme(false)">
+      <img [src]="`${baseUrl}/dark_mode.svg`" alt="Switch to light theme">
+    </button>
+    } @else {
+    <button class="icon-btn" (click)="themeSvc.setDarkTheme(true)">
+      <img [src]="`${baseUrl}/light_mode.svg`" alt="Switch to light theme">
+    </button>
+    }
+  </div>
   @for (navLink of navLinks; track $index) {
-    <a
-      class="navlink"
-      [routerLink]="navLink.href"
-      routerLinkActive="active-link"
-      ariaCurrentWhenActive="page"
-      [class.pointer-events-none]="rla.isActive"
-      #rla="routerLinkActive"
-      [attr.tabindex]="rla.isActive ? -1 : null"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >{{navLink.title}}</a>
+  <a class="navlink" [routerLink]="navLink.href" routerLinkActive="active-link" ariaCurrentWhenActive="page"
+    [class.pointer-events-none]="rla.isActive" #rla="routerLinkActive" [attr.tabindex]="rla.isActive ? -1 : null"
+    [routerLinkActiveOptions]="{ exact: true }">{{navLink.title}}</a>
   }
   <div class="divider">
-</div>
+  </div>
